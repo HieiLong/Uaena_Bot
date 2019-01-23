@@ -31,7 +31,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ImagePreview = new System.Windows.Forms.PictureBox();
-            this.DgvImage = new System.Windows.Forms.DataGridView();
+            this.GifLibary = new System.Windows.Forms.DataGridView();
             this.ImageName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ImageKeyword = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ImageLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,17 +39,17 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.BtnChatMsg = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.BtnDebug = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.BtnAddImg = new System.Windows.Forms.Button();
             this.PnlChat = new System.Windows.Forms.Panel();
             this.LblChat = new System.Windows.Forms.Label();
             this.ChatLogBG = new System.ComponentModel.BackgroundWorker();
-            this.BtnDebug = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ImagePreview)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DgvImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GifLibary)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.PnlChat.SuspendLayout();
@@ -62,7 +62,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.DgvImage, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.GifLibary, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.panel3, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.PnlChat, 1, 0);
@@ -102,28 +102,28 @@
             this.ImagePreview.TabIndex = 0;
             this.ImagePreview.TabStop = false;
             // 
-            // DgvImage
+            // GIFLibary
             // 
-            this.DgvImage.AllowUserToAddRows = false;
-            this.DgvImage.AllowUserToDeleteRows = false;
-            this.DgvImage.AllowUserToResizeColumns = false;
-            this.DgvImage.AllowUserToResizeRows = false;
-            this.DgvImage.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.DgvImage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvImage.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.GifLibary.AllowUserToAddRows = false;
+            this.GifLibary.AllowUserToDeleteRows = false;
+            this.GifLibary.AllowUserToResizeColumns = false;
+            this.GifLibary.AllowUserToResizeRows = false;
+            this.GifLibary.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.GifLibary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GifLibary.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ImageName,
             this.ImageKeyword,
             this.ImageLocation});
-            this.DgvImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DgvImage.Location = new System.Drawing.Point(3, 241);
-            this.DgvImage.MultiSelect = false;
-            this.DgvImage.Name = "DgvImage";
-            this.DgvImage.ReadOnly = true;
-            this.DgvImage.RowHeadersVisible = false;
-            this.DgvImage.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.DgvImage.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvImage.Size = new System.Drawing.Size(406, 232);
-            this.DgvImage.TabIndex = 1;
+            this.GifLibary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GifLibary.Location = new System.Drawing.Point(3, 241);
+            this.GifLibary.MultiSelect = false;
+            this.GifLibary.Name = "GIFLibary";
+            this.GifLibary.ReadOnly = true;
+            this.GifLibary.RowHeadersVisible = false;
+            this.GifLibary.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.GifLibary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.GifLibary.Size = new System.Drawing.Size(406, 232);
+            this.GifLibary.TabIndex = 1;
             // 
             // ImageName
             // 
@@ -185,6 +185,17 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(406, 29);
             this.panel3.TabIndex = 5;
+            // 
+            // BtnDebug
+            // 
+            this.BtnDebug.Dock = System.Windows.Forms.DockStyle.Left;
+            this.BtnDebug.Location = new System.Drawing.Point(150, 0);
+            this.BtnDebug.Name = "BtnDebug";
+            this.BtnDebug.Size = new System.Drawing.Size(75, 29);
+            this.BtnDebug.TabIndex = 3;
+            this.BtnDebug.Text = "Debug";
+            this.BtnDebug.UseVisualStyleBackColor = true;
+            this.BtnDebug.Click += new System.EventHandler(this.BtnDebug_Click);
             // 
             // button3
             // 
@@ -252,17 +263,6 @@
             // 
             this.ChatLogBG.DoWork += new System.ComponentModel.DoWorkEventHandler(this.ChatLogBG_DoWork);
             // 
-            // BtnDebug
-            // 
-            this.BtnDebug.Dock = System.Windows.Forms.DockStyle.Left;
-            this.BtnDebug.Location = new System.Drawing.Point(150, 0);
-            this.BtnDebug.Name = "BtnDebug";
-            this.BtnDebug.Size = new System.Drawing.Size(75, 29);
-            this.BtnDebug.TabIndex = 3;
-            this.BtnDebug.Text = "Debug";
-            this.BtnDebug.UseVisualStyleBackColor = true;
-            this.BtnDebug.Click += new System.EventHandler(this.BtnDebug_Click);
-            // 
             // MainMenu
             // 
             this.AcceptButton = this.BtnChatMsg;
@@ -278,7 +278,7 @@
             this.tableLayoutPanel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ImagePreview)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DgvImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GifLibary)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -292,7 +292,7 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView DgvImage;
+        private System.Windows.Forms.DataGridView GifLibary;
         private System.Windows.Forms.Button BtnAddImg;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;

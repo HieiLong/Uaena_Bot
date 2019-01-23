@@ -42,6 +42,7 @@ namespace Uaena_Bot
             ChatLogBG.RunWorkerAsync();
         }
 
+        // Create a Form to Add a GIF to the GifLibrary
         private void BtnAddImg_Click(object sender, EventArgs e)
         {
             using (var addImageForm = new AddImageForm())
@@ -50,11 +51,13 @@ namespace Uaena_Bot
 
                 if (addImageFormResult == DialogResult.OK)
                 {
+                    // Return the Values of the Image's Name, Keyword and Location to Local Variables 
                     string imageName = addImageForm.imageName;
                     string imageKeyword = addImageForm.imageKeyword;
                     string imageLocation = addImageForm.imageLocation;
 
-                    DgvImage.Rows.Add(imageName,imageKeyword,imageLocation);
+                    // Add the Image's Values to the GifLibrary
+                    GifLibary.Rows.Add(imageName,imageKeyword,imageLocation);
                 }
             }            
         }
@@ -64,61 +67,82 @@ namespace Uaena_Bot
 
         }
         
+        // Send the Message to the Chatroom
         private void BtnChatMsg_Click(object sender, EventArgs e)
         {
+            // Append the Message to the chatLog Variable
             chatLog += String.Format("{0}: {1} \n\n", userName, textBox1.Text);
 
+            // Overwrite the Values of LblChat with chatLog
             LblChat.Text = chatLog;
 
+            //Scroll to the Bottom of PnlChat and Display the Latest Message
             PnlChat.VerticalScroll.Value = PnlChat.VerticalScroll.Maximum;
-
             PnlChat.PerformLayout();
 
+            // Send Message using the IRC Client
             irc.SendPublicChatMessage(textBox1.Text);
         }
 
+        // Analyse the Chatroom for any IRC Messages
         private void ChatLogBG_DoWork(object sender, DoWorkEventArgs e)
         {
+            // Infinite Loop
             while (true)
             {
+                // Initialise Local Variables to Separate the Username and the Message from Raw IRC Message
                 string irc_message = irc.ReadMessage();
                 string irc_userName = "";
                 string message = "";
 
+                // Format the Message if it is Sent by a User
                 if (irc_message.Contains("PRIVMSG"))
                 {
+                    // Isolate the Username Within the Raw IRC Message
                     int intIndexParseSign = irc_message.IndexOf('!');
                     irc_userName = irc_message.Substring(1, intIndexParseSign - 1);
 
+                    // Isolate the Message Within the Raw IRC Message
                     intIndexParseSign = irc_message.IndexOf(" :");
                     message = irc_message.Substring(intIndexParseSign + 2);
 
+                    // Append the Message to the chatLog Variable
                     chatLog += String.Format("{0}: {1} \n\n", irc_userName, message);
                 }
                 else
                 {
+                    // Append the Message to the chatLog Variable
                     chatLog += irc_message + "\n\n";
                 }
 
+                // Overwrite the Values of LblChat with chatLog
                 LblChat.Text = chatLog;
 
+                //Scroll to the Bottom of PnlChat and Display the Latest Message
                 PnlChat.VerticalScroll.Value = PnlChat.VerticalScroll.Maximum;
                 PnlChat.PerformLayout();
 
-                // Loop Through the Rows in DgvImage
-                int imageCount = DgvImage.Rows.Count;
+                // Split Every Word in the Message
+                string[] words = message.Split(' ');
 
-                if (imageCount >= 1)
+                // Count Total Rows in GifLibrary
+                int imageCount = GifLibary.Rows.Count;
+
+                // For each Word in the Message, Loop Through and Change the ImageLocation in ImagePreview
+                foreach (string word in words)
                 {
-                    for (int i = 0; i < imageCount; i++)
+                    if (imageCount >= 1)
                     {
-                        if (DgvImage.Rows[i].Cells[1].Value.ToString().Contains(message))
+                        for (int i = 0; i < imageCount; i++)
                         {
-                            string imageLocation = DgvImage.Rows[i].Cells[2].Value.ToString();
-                            ImagePreview.ImageLocation = imageLocation;
+                            if ( GifLibary.Rows[i].Cells[1].Value.ToString().Contains(word.ToLower()) || 
+                                GifLibary.Rows[i].Cells[1].Value.ToString().Contains(word.ToUpper()))
+                            {
+                                string imageLocation = GifLibary.Rows[i].Cells[2].Value.ToString();
+                                ImagePreview.ImageLocation = imageLocation;
+                            }
                         }
                     }
-
                 }
             }
         }
@@ -146,17 +170,17 @@ namespace Uaena_Bot
         // DEBUG - Shows Selected Row in DgvImage
         private void BtnDebug_Click(object sender, EventArgs e)
         {
-            int imageCount = DgvImage.Rows.Count;
+            int imageCount = GifLibary.Rows.Count;
 
             if (imageCount >= 1)
             {
-                int selectedCell = DgvImage.CurrentCell.RowIndex;
+                int selectedCell = GifLibary.CurrentCell.RowIndex;
 
-                string imageLocation = DgvImage.Rows[selectedCell].Cells[2].Value.ToString();
+                string imageLocation = GifLibary.Rows[selectedCell].Cells[2].Value.ToString();
 
-                string imageName = DgvImage.Rows[selectedCell].Cells[0].Value.ToString();
+                string imageName = GifLibary.Rows[selectedCell].Cells[0].Value.ToString();
 
-                string imageKeyword = DgvImage.Rows[selectedCell].Cells[1].Value.ToString();
+                string imageKeyword = GifLibary.Rows[selectedCell].Cells[1].Value.ToString();
 
                 // DEBUG - sample chat message 
                 string chatMsg = "IU";

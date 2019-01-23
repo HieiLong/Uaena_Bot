@@ -202,10 +202,6 @@
             this.BtnCancel.UseVisualStyleBackColor = true;
             this.BtnCancel.Click += new System.EventHandler(this.button3_Click);
             // 
-            // OfdBrowseImage
-            // 
-            this.OfdBrowseImage.FileName = "openFileDialog1";
-            // 
             // AddImageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
