@@ -37,9 +37,8 @@ namespace Uaena_Bot
             channel = userAccount.GetChannel();
             twitchOAuth = userAccount.GetTwitchOAuth();
 
+            // Create Instance of the IRC CLient 
             irc = new IrcClient("irc.twitch.tv", 6667, userName, twitchOAuth, channel);
-
-            //irc.SendPublicChatMessage("Uaena");
             ChatLogBG.RunWorkerAsync();
         }
 
@@ -67,7 +66,7 @@ namespace Uaena_Bot
         
         private void BtnChatMsg_Click(object sender, EventArgs e)
         {
-            chatLog += textBox1.Text + "\n\n";
+            chatLog += String.Format("{0}: {1} \n\n", userName, textBox1.Text);
 
             LblChat.Text = chatLog;
 
@@ -82,15 +81,45 @@ namespace Uaena_Bot
         {
             while (true)
             {
-                
                 string irc_message = irc.ReadMessage();
+                string irc_userName = "";
+                string message = "";
 
-                chatLog += irc_message + "\n\n";
+                if (irc_message.Contains("PRIVMSG"))
+                {
+                    int intIndexParseSign = irc_message.IndexOf('!');
+                    irc_userName = irc_message.Substring(1, intIndexParseSign - 1);
+
+                    intIndexParseSign = irc_message.IndexOf(" :");
+                    message = irc_message.Substring(intIndexParseSign + 2);
+
+                    chatLog += String.Format("{0}: {1} \n\n", irc_userName, message);
+                }
+                else
+                {
+                    chatLog += irc_message + "\n\n";
+                }
+
                 LblChat.Text = chatLog;
 
                 PnlChat.VerticalScroll.Value = PnlChat.VerticalScroll.Maximum;
                 PnlChat.PerformLayout();
-                
+
+                // Loop Through the Rows in DgvImage
+                int imageCount = DgvImage.Rows.Count;
+
+                if (imageCount >= 1)
+                {
+                    for (int i = 0; i < imageCount; i++)
+                    {
+                        if (DgvImage.Rows[i].Cells[1].Value.ToString().Contains(message))
+                        {
+                            string imageLocation = DgvImage.Rows[i].Cells[2].Value.ToString();
+                            ImagePreview.ImageLocation = imageLocation;
+                        }
+                    }
+
+                }
             }
         }
 
@@ -112,6 +141,44 @@ namespace Uaena_Bot
         private void PnlChat_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        // DEBUG - Shows Selected Row in DgvImage
+        private void BtnDebug_Click(object sender, EventArgs e)
+        {
+            int imageCount = DgvImage.Rows.Count;
+
+            if (imageCount >= 1)
+            {
+                int selectedCell = DgvImage.CurrentCell.RowIndex;
+
+                string imageLocation = DgvImage.Rows[selectedCell].Cells[2].Value.ToString();
+
+                string imageName = DgvImage.Rows[selectedCell].Cells[0].Value.ToString();
+
+                string imageKeyword = DgvImage.Rows[selectedCell].Cells[1].Value.ToString();
+
+                // DEBUG - sample chat message 
+                string chatMsg = "IU";
+                if (imageKeyword.Contains(chatMsg.ToLower()) || imageKeyword.Contains(chatMsg.ToUpper()))
+                {
+                    ImagePreview.ImageLocation = imageLocation;
+                }
+                else
+                {
+                    ImagePreview.ImageLocation = "";
+                }
+
+                string imageDetails = String.Format("Name/Keyword: {0}  | ({1}) \n Location: {2}", imageName, imageKeyword, imageLocation);
+
+                MessageBox.Show(imageDetails);
+            }
+            else
+            {
+                MessageBox.Show("Please Add Some Images.");
+            }
+
+            
         }
     }
 }

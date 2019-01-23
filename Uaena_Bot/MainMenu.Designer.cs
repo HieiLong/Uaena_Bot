@@ -45,6 +45,7 @@
             this.PnlChat = new System.Windows.Forms.Panel();
             this.LblChat = new System.Windows.Forms.Label();
             this.ChatLogBG = new System.ComponentModel.BackgroundWorker();
+            this.BtnDebug = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ImagePreview)).BeginInit();
@@ -175,6 +176,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.BtnDebug);
             this.panel3.Controls.Add(this.button3);
             this.panel3.Controls.Add(this.button2);
             this.panel3.Controls.Add(this.BtnAddImg);
@@ -250,6 +252,17 @@
             // 
             this.ChatLogBG.DoWork += new System.ComponentModel.DoWorkEventHandler(this.ChatLogBG_DoWork);
             // 
+            // BtnDebug
+            // 
+            this.BtnDebug.Dock = System.Windows.Forms.DockStyle.Left;
+            this.BtnDebug.Location = new System.Drawing.Point(150, 0);
+            this.BtnDebug.Name = "BtnDebug";
+            this.BtnDebug.Size = new System.Drawing.Size(75, 29);
+            this.BtnDebug.TabIndex = 3;
+            this.BtnDebug.Text = "Debug";
+            this.BtnDebug.UseVisualStyleBackColor = true;
+            this.BtnDebug.Click += new System.EventHandler(this.BtnDebug_Click);
+            // 
             // MainMenu
             // 
             this.AcceptButton = this.BtnChatMsg;
@@ -294,6 +307,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ImageName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ImageKeyword;
         private System.Windows.Forms.DataGridViewTextBoxColumn ImageLocation;
+        private System.Windows.Forms.Button BtnDebug;
     }
 }
 
