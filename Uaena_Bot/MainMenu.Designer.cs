@@ -46,6 +46,7 @@
             this.PnlChat = new System.Windows.Forms.Panel();
             this.LblChat = new System.Windows.Forms.Label();
             this.ChatLogBG = new System.ComponentModel.BackgroundWorker();
+            this.ImagePreviewBG = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ImagePreview)).BeginInit();
@@ -102,7 +103,7 @@
             this.ImagePreview.TabIndex = 0;
             this.ImagePreview.TabStop = false;
             // 
-            // GIFLibary
+            // GifLibary
             // 
             this.GifLibary.AllowUserToAddRows = false;
             this.GifLibary.AllowUserToDeleteRows = false;
@@ -117,7 +118,7 @@
             this.GifLibary.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GifLibary.Location = new System.Drawing.Point(3, 241);
             this.GifLibary.MultiSelect = false;
-            this.GifLibary.Name = "GIFLibary";
+            this.GifLibary.Name = "GifLibary";
             this.GifLibary.ReadOnly = true;
             this.GifLibary.RowHeadersVisible = false;
             this.GifLibary.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
@@ -263,6 +264,10 @@
             // 
             this.ChatLogBG.DoWork += new System.ComponentModel.DoWorkEventHandler(this.ChatLogBG_DoWork);
             // 
+            // ImagePreviewBG
+            // 
+            this.ImagePreviewBG.DoWork += new System.ComponentModel.DoWorkEventHandler(this.ImagePreviewBG_DoWork);
+            // 
             // MainMenu
             // 
             this.AcceptButton = this.BtnChatMsg;
@@ -308,6 +313,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ImageKeyword;
         private System.Windows.Forms.DataGridViewTextBoxColumn ImageLocation;
         private System.Windows.Forms.Button BtnDebug;
+        private System.ComponentModel.BackgroundWorker ImagePreviewBG;
     }
 }
 

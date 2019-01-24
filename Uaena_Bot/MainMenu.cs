@@ -40,6 +40,8 @@ namespace Uaena_Bot
             // Create Instance of the IRC CLient 
             irc = new IrcClient("irc.twitch.tv", 6667, userName, twitchOAuth, channel);
             ChatLogBG.RunWorkerAsync();
+
+            ImagePreviewBG.RunWorkerAsync();
         }
 
         // Create a Form to Add a GIF to the GifLibrary
@@ -203,6 +205,19 @@ namespace Uaena_Bot
             }
 
             
+        }
+
+        // Empty the ImagePreview after 7 Secounds (* Might Want to Change How this Works to Maximise Performance)
+        private void ImagePreviewBG_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                if (ImagePreview.ImageLocation != String.Empty || ImagePreview.ImageLocation != "")
+                {
+                    System.Threading.Thread.Sleep(7000);
+                    ImagePreview.ImageLocation = "";
+                }
+            }
         }
     }
 }
