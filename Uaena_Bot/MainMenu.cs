@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -39,9 +40,31 @@ namespace Uaena_Bot
 
             // Create Instance of the IRC CLient 
             irc = new IrcClient("irc.twitch.tv", 6667, userName, twitchOAuth, channel);
-            ChatLogBG.RunWorkerAsync();
 
+            // Execute BackgroundWorkers
+            ChatLogBG.RunWorkerAsync();
             ImagePreviewBG.RunWorkerAsync();
+
+            // Check if Directory Exist
+            if (!Directory.Exists(@".\Uaena_Data\"))
+            {
+                Directory.CreateDirectory(@".\Uaena_Data\");
+            }
+            
+            // Check if GifList.csv Exist
+            if (File.Exists(@".\Uaena_Data\GifList.csv"))
+            {
+                // Read GifList
+                string[] GifListLines = File.ReadAllLines(@".\Uaena_Data\GifList.csv");
+                
+                foreach (string line in GifListLines)
+                {
+                    string[] GifList = line.Split(',');
+
+                    GifLibary.Rows.Add(GifList[0], GifList[1], GifList[2]);
+                }
+            }
+            
         }
 
         // Create a Form to Add a GIF to the GifLibrary
@@ -124,28 +147,33 @@ namespace Uaena_Bot
                 PnlChat.VerticalScroll.Value = PnlChat.VerticalScroll.Maximum;
                 PnlChat.PerformLayout();
 
-                // Split Every Word in the Message
-                string[] words = message.Split(' ');
-
-                // Count Total Rows in GifLibrary
-                int imageCount = GifLibary.Rows.Count;
-
-                // For each Word in the Message, Loop Through and Change the ImageLocation in ImagePreview
-                foreach (string word in words)
+                if (message != String.Empty)
                 {
-                    if (imageCount >= 1)
+                    // Split Every Word in the Message
+                    string[] words = message.Split(' ');
+
+                    // Count Total Rows in GifLibrary
+                    int imageCount = GifLibary.Rows.Count;
+
+
+                    // For each Word in the Message, Loop Through and Change the ImageLocation in ImagePreview
+                    foreach (string word in words)
                     {
-                        for (int i = 0; i < imageCount; i++)
+                        if (imageCount >= 1)
                         {
-                            if ( GifLibary.Rows[i].Cells[1].Value.ToString().Contains(word.ToLower()) || 
-                                GifLibary.Rows[i].Cells[1].Value.ToString().Contains(word.ToUpper()))
+                            for (int i = 0; i < imageCount; i++)
                             {
-                                string imageLocation = GifLibary.Rows[i].Cells[2].Value.ToString();
-                                ImagePreview.ImageLocation = imageLocation;
+                                if (GifLibary.Rows[i].Cells[1].Value.ToString().Contains(word.ToLower()) ||
+                                    GifLibary.Rows[i].Cells[1].Value.ToString().Contains(word.ToUpper()))
+                                {
+                                    string imageLocation = GifLibary.Rows[i].Cells[2].Value.ToString();
+                                    ImagePreview.ImageLocation = imageLocation;
+                                }
                             }
                         }
                     }
                 }
+                
             }
         }
 
@@ -172,39 +200,45 @@ namespace Uaena_Bot
         // DEBUG - Shows Selected Row in DgvImage
         private void BtnDebug_Click(object sender, EventArgs e)
         {
-            int imageCount = GifLibary.Rows.Count;
-
-            if (imageCount >= 1)
+            // Check if Directory Exist
+            if (!Directory.Exists(@".\Uaena_Data\"))
             {
-                int selectedCell = GifLibary.CurrentCell.RowIndex;
-
-                string imageLocation = GifLibary.Rows[selectedCell].Cells[2].Value.ToString();
-
-                string imageName = GifLibary.Rows[selectedCell].Cells[0].Value.ToString();
-
-                string imageKeyword = GifLibary.Rows[selectedCell].Cells[1].Value.ToString();
-
-                // DEBUG - sample chat message 
-                string chatMsg = "IU";
-                if (imageKeyword.Contains(chatMsg.ToLower()) || imageKeyword.Contains(chatMsg.ToUpper()))
-                {
-                    ImagePreview.ImageLocation = imageLocation;
-                }
-                else
-                {
-                    ImagePreview.ImageLocation = "";
-                }
-
-                string imageDetails = String.Format("Name/Keyword: {0}  | ({1}) \n Location: {2}", imageName, imageKeyword, imageLocation);
-
-                MessageBox.Show(imageDetails);
-            }
-            else
-            {
-                MessageBox.Show("Please Add Some Images.");
+                Directory.CreateDirectory(@".\Uaena_Data\");
             }
 
-            
+            // Check if GifList.csv Exist
+            if (File.Exists(@".\Uaena_Data\GifList.csv"))
+            {
+                // Read GifList
+                string[] GifListLines = File.ReadAllLines(@".\Uaena_Data\GifList.csv");
+
+                foreach (string line in GifListLines)
+                {
+                    string[] GifList = line.Split(',');
+
+                    GifLibary.Rows.Add(GifList[0], GifList[1], GifList[2]);
+                }
+            }
+        }
+
+        // Save GifLibrary to a CSV File on Exit
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            StringBuilder GifList = new StringBuilder();
+
+            foreach (DataGridViewRow row in GifLibary.Rows)
+            {
+                string gifName = row.Cells[0].Value.ToString();
+                string gifKeyword = row.Cells[1].Value.ToString();
+                string gifLocation = row.Cells[2].Value.ToString();
+                string gifCSV = String.Format("{0},{1},{2}", gifName, gifKeyword, gifLocation);
+                GifList.AppendLine(gifCSV);
+            }
+
+            File.WriteAllText(@".\Uaena_Data\GifList.csv", GifList.ToString());
+
         }
 
         // Empty the ImagePreview after 7 Secounds (* Might Want to Change How this Works to Maximise Performance)
