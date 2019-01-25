@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+using System.IO;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Uaena_Bot
@@ -44,6 +40,7 @@ namespace Uaena_Bot
             // Execute BackgroundWorkers
             ChatLogBG.RunWorkerAsync();
             ImagePreviewBG.RunWorkerAsync();
+            SendPingBG.RunWorkerAsync();
 
             // Check if Directory Exist
             if (!Directory.Exists(@".\Uaena_Data\"))
@@ -248,9 +245,18 @@ namespace Uaena_Bot
             {
                 if (ImagePreview.ImageLocation != String.Empty || ImagePreview.ImageLocation != "")
                 {
-                    System.Threading.Thread.Sleep(7000);
+                    Thread.Sleep(7000);
                     ImagePreview.ImageLocation = "";
                 }
+            }
+        }
+
+        private void SendPingBG_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                irc.SendIrcMessage("PING irc.twitch.tv");
+                Thread.Sleep(300000); // 5 minutes
             }
         }
     }

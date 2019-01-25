@@ -1,0 +1,11 @@
+D:\C# Projects\Uaena_Bot\Uaena_Bot\bin\Release\Uaena_Bot.exe.config
+D:\C# Projects\Uaena_Bot\Uaena_Bot\bin\Release\Uaena_Bot.exe
+D:\C# Projects\Uaena_Bot\Uaena_Bot\bin\Release\Uaena_Bot.pdb
+D:\C# Projects\Uaena_Bot\Uaena_Bot\obj\Release\Uaena_Bot.csprojAssemblyReference.cache
+D:\C# Projects\Uaena_Bot\Uaena_Bot\obj\Release\Uaena_Bot.AddImageForm.resources
+D:\C# Projects\Uaena_Bot\Uaena_Bot\obj\Release\Uaena_Bot.MainMenu.resources
+D:\C# Projects\Uaena_Bot\Uaena_Bot\obj\Release\Uaena_Bot.Properties.Resources.resources
+D:\C# Projects\Uaena_Bot\Uaena_Bot\obj\Release\Uaena_Bot.csproj.GenerateResource.cache
+D:\C# Projects\Uaena_Bot\Uaena_Bot\obj\Release\Uaena_Bot.csproj.CoreCompileInputs.cache
+D:\C# Projects\Uaena_Bot\Uaena_Bot\obj\Release\Uaena_Bot.exe
+D:\C# Projects\Uaena_Bot\Uaena_Bot\obj\Release\Uaena_Bot.pdb

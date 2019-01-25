@@ -47,6 +47,7 @@
             this.LblChat = new System.Windows.Forms.Label();
             this.ChatLogBG = new System.ComponentModel.BackgroundWorker();
             this.ImagePreviewBG = new System.ComponentModel.BackgroundWorker();
+            this.SendPingBG = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ImagePreview)).BeginInit();
@@ -268,6 +269,10 @@
             // 
             this.ImagePreviewBG.DoWork += new System.ComponentModel.DoWorkEventHandler(this.ImagePreviewBG_DoWork);
             // 
+            // SendPingBG
+            // 
+            this.SendPingBG.DoWork += new System.ComponentModel.DoWorkEventHandler(this.SendPingBG_DoWork);
+            // 
             // MainMenu
             // 
             this.AcceptButton = this.BtnChatMsg;
@@ -314,6 +319,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ImageLocation;
         private System.Windows.Forms.Button BtnDebug;
         private System.ComponentModel.BackgroundWorker ImagePreviewBG;
+        private System.ComponentModel.BackgroundWorker SendPingBG;
     }
 }
 
