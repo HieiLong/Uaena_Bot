@@ -16,7 +16,7 @@ namespace Uaena_Bot
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainMenu());
+            Application.Run(new Login());
         }
     }
 }

@@ -2,8 +2,9 @@
 using System.Net.Sockets;
 using System.IO;
 
-namespace Uaena_Bot
+namespace TwitchBotDemo
 {
+    // Reference: https://www.youtube.com/watch?v=Ss-OzV9aUZg
     public class IrcClient
     {
         public string userName;
@@ -13,7 +14,7 @@ namespace Uaena_Bot
         private StreamReader _inputStream;
         private StreamWriter _outputStream;
 
-        public IrcClient(string ip, int port, string userName, string twitchOAuth, string channel)
+        public IrcClient(string ip, int port, string userName, string password, string channel)
         {
             try
             {
@@ -25,7 +26,7 @@ namespace Uaena_Bot
                 _outputStream = new StreamWriter(_tcpClient.GetStream());
 
                 // Try to join the room
-                _outputStream.WriteLine("PASS " + twitchOAuth);
+                _outputStream.WriteLine("PASS " + password);
                 _outputStream.WriteLine("NICK " + userName);
                 _outputStream.WriteLine("USER " + userName + " 8 * :" + userName);
                 _outputStream.WriteLine("JOIN #" + channel);
@@ -77,3 +78,4 @@ namespace Uaena_Bot
         }
     }
 }
+
