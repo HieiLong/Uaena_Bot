@@ -1,6 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
-namespace Uaena_Bot_v2
+namespace Uaena_Bot
 {
     class UserAccount
     {
@@ -8,8 +9,9 @@ namespace Uaena_Bot_v2
         private string UserName { get; set; }
         private string Channel { get; set; }
         private string TwitchOAuth { get; set; }
+        private bool Remember { get; set; }
 
-        private string UserAccountHeaders = "UserName,Channel,TwitchOAuth";
+        private string UserAccountHeaders = "UserName,Channel,TwitchOAuth,Remember";
 
         // File Locations 
         private string ConfigLocation = @".\Config\";
@@ -36,12 +38,13 @@ namespace Uaena_Bot_v2
         }
 
         // Full Constructor
-        public UserAccount(string userName, string channel, string twitchOAuth)
+        public UserAccount(string userName, string channel, string twitchOAuth, bool remember)
         {
             // PARAMETERS
             UserName = userName;
             Channel = channel;
             TwitchOAuth = twitchOAuth;
+            Remember = remember;
         }
 
         // METHODS
@@ -49,7 +52,7 @@ namespace Uaena_Bot_v2
         // Produce a string containing all of the UserAccount's parameters 
         public string GetUserAccountCSVString()
         {
-            string CSVString = string.Format("{0},{1},{2}", UserName, Channel, TwitchOAuth);
+            string CSVString = string.Format("{0},{1},{2},{3}", UserName, Channel, TwitchOAuth, Remember);
             return CSVString;
         }
 
@@ -63,16 +66,28 @@ namespace Uaena_Bot_v2
         // Load UserAccount from File
         public void LoadUserAccount()
         {
-            string[] UserAccountFile = File.ReadAllLines(UserAccountFileLocation);
+            string UserAccountFile = File.ReadAllText(UserAccountFileLocation);
 
-            foreach (string line in UserAccountFile)
+            if (!string.Equals(UserAccountFile,UserAccountHeaders))
             {
-                string[] UserAccountInfo = line.Split(',');
+                string[] UserAccountInfo = UserAccountFile.Split(',');
 
                 UserName = UserAccountInfo[0];
                 Channel = UserAccountInfo[1];
                 TwitchOAuth = UserAccountInfo[2];
+                Remember = Convert.ToBoolean(UserAccountInfo[3]);
+            }     
+        }
+
+        // Remove UserAccount in File
+        public void RemoveUserAccount()
+        {
+            // Check for LibraryFile existence
+            if (File.Exists(UserAccountFileLocation))
+            {
+                File.Delete(UserAccountFileLocation);
             }
+
         }
     }
 }

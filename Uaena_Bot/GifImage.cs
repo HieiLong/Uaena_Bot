@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 
-namespace Uaena_Bot_v2
+namespace Uaena_Bot
 {
     public class GifImage
     {

@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Uaena_Bot_v2
+namespace Uaena_Bot
 {
     public class GifLibrary
     {

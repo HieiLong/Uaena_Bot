@@ -1,0 +1,11 @@
+C:\Users\ccruz\Documents\GitHub\Uaena_Bot\Uaena_Bot\bin\Debug\Uaena_Bot.exe.config
+C:\Users\ccruz\Documents\GitHub\Uaena_Bot\Uaena_Bot\bin\Debug\Uaena_Bot.exe
+C:\Users\ccruz\Documents\GitHub\Uaena_Bot\Uaena_Bot\bin\Debug\Uaena_Bot.pdb
+C:\Users\ccruz\Documents\GitHub\Uaena_Bot\Uaena_Bot\obj\Debug\Uaena_Bot.csprojAssemblyReference.cache
+C:\Users\ccruz\Documents\GitHub\Uaena_Bot\Uaena_Bot\obj\Debug\Uaena_Bot.Properties.Resources.resources
+C:\Users\ccruz\Documents\GitHub\Uaena_Bot\Uaena_Bot\obj\Debug\Uaena_Bot.csproj.GenerateResource.cache
+C:\Users\ccruz\Documents\GitHub\Uaena_Bot\Uaena_Bot\obj\Debug\Uaena_Bot.csproj.CoreCompileInputs.cache
+C:\Users\ccruz\Documents\GitHub\Uaena_Bot\Uaena_Bot\obj\Debug\Uaena_Bot.exe
+C:\Users\ccruz\Documents\GitHub\Uaena_Bot\Uaena_Bot\obj\Debug\Uaena_Bot.pdb
+C:\Users\ccruz\Documents\GitHub\Uaena_Bot\Uaena_Bot\obj\Debug\Uaena_Bot.LogInForm.resources
+C:\Users\ccruz\Documents\GitHub\Uaena_Bot\Uaena_Bot\obj\Debug\Uaena_Bot.ChatBot.resources
