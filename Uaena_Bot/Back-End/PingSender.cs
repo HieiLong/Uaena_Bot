@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 
-namespace TwitchBotDemo
+namespace Uaena_Bot
 {
     /*
     * Class that sends PING to irc server every 5 minutes

@@ -1,6 +1,6 @@
 ﻿namespace Uaena_Bot
 {
-    partial class LogInForm
+    partial class LogIn
     {
         /// <summary>
         /// Required designer variable.
@@ -35,7 +35,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.TwitchOAuth = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.Username = new System.Windows.Forms.TextBox();
+            this.UserName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.LoginBtn = new System.Windows.Forms.Button();
@@ -69,7 +69,7 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.TwitchOAuth);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.Username);
+            this.panel1.Controls.Add(this.UserName);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
@@ -131,14 +131,14 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Twitch OAuth";
             // 
-            // Username
+            // UserName
             // 
-            this.Username.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Username.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.Username.Location = new System.Drawing.Point(0, 17);
-            this.Username.Name = "Username";
-            this.Username.Size = new System.Drawing.Size(298, 23);
-            this.Username.TabIndex = 1;
+            this.UserName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.UserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.UserName.Location = new System.Drawing.Point(0, 17);
+            this.UserName.Name = "UserName";
+            this.UserName.Size = new System.Drawing.Size(298, 23);
+            this.UserName.TabIndex = 1;
             // 
             // label2
             // 
@@ -175,14 +175,14 @@
             this.LoginBtn.UseVisualStyleBackColor = true;
             this.LoginBtn.Click += new System.EventHandler(this.LoginBtn_Click);
             // 
-            // LogInForm
+            // LogIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(324, 414);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "LogInForm";
+            this.Name = "LogIn";
             this.Text = "Log In - Uaena_Bot";
             this.Load += new System.EventHandler(this.Login_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -199,7 +199,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox TwitchOAuth;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox Username;
+        private System.Windows.Forms.TextBox UserName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button LoginBtn;

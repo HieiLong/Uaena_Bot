@@ -31,8 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChatBot));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.LogOutBtn = new System.Windows.Forms.Button();
+            this.LoggedInLbl = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -42,15 +42,15 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.ChatLog = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -87,8 +87,8 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.button1);
-            this.flowLayoutPanel1.Controls.Add(this.label1);
+            this.flowLayoutPanel1.Controls.Add(this.LogOutBtn);
+            this.flowLayoutPanel1.Controls.Add(this.LoggedInLbl);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
@@ -96,25 +96,27 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(952, 29);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
-            // button1
+            // LogOutBtn
             // 
-            this.button1.Location = new System.Drawing.Point(874, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "LogOut";
-            this.button1.UseVisualStyleBackColor = true;
+            this.LogOutBtn.Location = new System.Drawing.Point(874, 3);
+            this.LogOutBtn.Name = "LogOutBtn";
+            this.LogOutBtn.Size = new System.Drawing.Size(75, 23);
+            this.LogOutBtn.TabIndex = 0;
+            this.LogOutBtn.Text = "LogOut";
+            this.LogOutBtn.UseVisualStyleBackColor = true;
+            this.LogOutBtn.Click += new System.EventHandler(this.LogOutBtn_Click);
             // 
-            // label1
+            // LoggedInLbl
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(749, 3);
-            this.label1.Margin = new System.Windows.Forms.Padding(3);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.label1.Size = new System.Drawing.Size(119, 23);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Logged In: {UserName}";
+            this.LoggedInLbl.AutoSize = true;
+            this.LoggedInLbl.Location = new System.Drawing.Point(685, 3);
+            this.LoggedInLbl.Margin = new System.Windows.Forms.Padding(3);
+            this.LoggedInLbl.Name = "LoggedInLbl";
+            this.LoggedInLbl.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.LoggedInLbl.Size = new System.Drawing.Size(183, 23);
+            this.LoggedInLbl.TabIndex = 1;
+            this.LoggedInLbl.Text = "Logged In: {UserName} @ {Channel}";
+            this.LoggedInLbl.Click += new System.EventHandler(this.label1_Click);
             // 
             // splitContainer1
             // 
@@ -252,12 +254,40 @@
             this.dataGridView1.Size = new System.Drawing.Size(468, 179);
             this.dataGridView1.TabIndex = 1;
             // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column1.FillWeight = 86.02151F;
+            this.Column1.HeaderText = "Name";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column2.FillWeight = 86.76624F;
+            this.Column2.HeaderText = "Keyword";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column3.FillWeight = 103.0134F;
+            this.Column3.HeaderText = "Duration";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column4.FillWeight = 124.1989F;
+            this.Column4.HeaderText = "Location";
+            this.Column4.Name = "Column4";
+            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.panel1, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.ChatLog, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -298,43 +328,20 @@
             this.button2.Text = "Send";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // ChatLog
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(122, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "{UserName}: {Message}";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column1.FillWeight = 86.02151F;
-            this.Column1.HeaderText = "Name";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.FillWeight = 86.76624F;
-            this.Column2.HeaderText = "Keyword";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column3.FillWeight = 103.0134F;
-            this.Column3.HeaderText = "Duration";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column4.FillWeight = 124.1989F;
-            this.Column4.HeaderText = "Location";
-            this.Column4.Name = "Column4";
+            this.ChatLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ChatLog.Cursor = System.Windows.Forms.Cursors.Default;
+            this.ChatLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ChatLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.ChatLog.Location = new System.Drawing.Point(0, 0);
+            this.ChatLog.Margin = new System.Windows.Forms.Padding(0);
+            this.ChatLog.Multiline = true;
+            this.ChatLog.Name = "ChatLog";
+            this.ChatLog.ReadOnly = true;
+            this.ChatLog.Size = new System.Drawing.Size(470, 415);
+            this.ChatLog.TabIndex = 1;
+            this.ChatLog.Text = "{UserName} : {Message}";
             // 
             // ChatBot
             // 
@@ -373,14 +380,13 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button LogOutBtn;
+        private System.Windows.Forms.Label LoggedInLbl;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
@@ -393,5 +399,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.TextBox ChatLog;
     }
 }

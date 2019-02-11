@@ -1,15 +1,17 @@
 ﻿using System;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Uaena_Bot
 {
-    class UserAccount
+    public class UserAccount
     {
         // PARAMETERS
         private string UserName { get; set; }
         private string Channel { get; set; }
         private string TwitchOAuth { get; set; }
         private bool Remember { get; set; }
+        private bool AccountExist { get; set; }
 
         private string UserAccountHeaders = "UserName,Channel,TwitchOAuth,Remember";
 
@@ -30,10 +32,11 @@ namespace Uaena_Bot
             if (!File.Exists(UserAccountFileLocation))
             {
                 File.WriteAllText(UserAccountFileLocation, UserAccountHeaders);
+                AccountExist = false;
             }
             else
             {
-                LoadUserAccount();
+                AccountExist = LoadUserAccount();  
             }
         }
 
@@ -45,6 +48,9 @@ namespace Uaena_Bot
             Channel = channel;
             TwitchOAuth = twitchOAuth;
             Remember = remember;
+
+            // Bypass
+            AccountExist = true;
         }
 
         // METHODS
@@ -56,6 +62,12 @@ namespace Uaena_Bot
             return CSVString;
         }
 
+        // Check for Account Existence
+        public bool GetAccountExistence()
+        {
+            return AccountExist;
+        }
+
         // Save UserAccount to File
         public void SaveUserAccount()
         {
@@ -64,7 +76,7 @@ namespace Uaena_Bot
         }
 
         // Load UserAccount from File
-        public void LoadUserAccount()
+        public bool LoadUserAccount()
         {
             string UserAccountFile = File.ReadAllText(UserAccountFileLocation);
 
@@ -76,16 +88,27 @@ namespace Uaena_Bot
                 Channel = UserAccountInfo[1];
                 TwitchOAuth = UserAccountInfo[2];
                 Remember = Convert.ToBoolean(UserAccountInfo[3]);
-            }     
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         // Remove UserAccount in File
-        public void RemoveUserAccount()
+        public bool RemoveUserAccount()
         {
             // Check for LibraryFile existence
             if (File.Exists(UserAccountFileLocation))
             {
                 File.Delete(UserAccountFileLocation);
+                return true;
+            }
+            else
+            {
+                return false;
             }
 
         }
